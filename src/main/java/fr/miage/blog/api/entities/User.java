@@ -15,6 +15,7 @@ public class User extends PanacheMongoEntity  {
     public String email;
     public String username;
     public ArrayList<String> follow;
+    public ArrayList<String> favoriteNews;
     @JsonIgnore public String password;
 
 }

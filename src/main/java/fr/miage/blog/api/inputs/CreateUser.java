@@ -21,6 +21,7 @@ public class CreateUser {
         user.username = this.username;
         user.password = this.password;
         user.follow = new ArrayList<>();
+        user.favoriteNews = new ArrayList<>();
         return user;
     }
 

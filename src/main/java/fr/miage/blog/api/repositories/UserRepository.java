@@ -55,4 +55,24 @@ public class UserRepository implements PanacheMongoRepository<User> {
         user.update();
         return Response.status(Response.Status.OK).build();
     }
+    public List<String> getFavoriteNews(String id) {
+        User user = User.findById(new ObjectId(id));
+        return user.favoriteNews;
+    }
+
+    public Response favorite(String id, String newsId) {
+        User user = User.findById(new ObjectId(id));
+        if(user.favoriteNews == null) user.favoriteNews = new ArrayList<>();
+        user.favoriteNews.add(newsId);
+        user.update();
+        return Response.status(Response.Status.OK).build();
+    }
+
+    public Response unfavorite(String id, String newsId) {
+        User user = User.findById(new ObjectId(id));
+        if(user.favoriteNews == null) user.favoriteNews = new ArrayList<>();
+        user.favoriteNews.remove(newsId);
+        user.update();
+        return Response.status(Response.Status.OK).build();
+    }
 }
