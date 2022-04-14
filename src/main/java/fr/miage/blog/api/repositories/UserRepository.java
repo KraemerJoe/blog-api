@@ -1,6 +1,7 @@
 package fr.miage.blog.api.repositories;
 
 import fr.miage.blog.api.entities.News;
+import fr.miage.blog.api.entities.User;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import org.bson.types.ObjectId;
 
@@ -9,20 +10,20 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ApplicationScoped
-public class NewsRepository implements PanacheMongoRepository<News> {
+public class UserRepository implements PanacheMongoRepository<User> {
 
-    public List<News> listAllNews() {
+    public List<User> listAllUsers() {
         return listAll();
     }
 
-    public Response deleteNews(String objectId) {
-        News news = News.findById(new ObjectId(objectId));
+    public Response deleteUser(String objectId) {
+        User user = User.findById(new ObjectId(objectId));
 
-        if(news == null){
+        if(user == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         else {
-            news.delete();
+            user.delete();
             return Response.status(Response.Status.NO_CONTENT).build();
         }
     }
