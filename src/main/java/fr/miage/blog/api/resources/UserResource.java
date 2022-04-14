@@ -3,6 +3,7 @@ package fr.miage.blog.api.resources;
 import fr.miage.blog.api.entities.News;
 import fr.miage.blog.api.entities.User;
 import fr.miage.blog.api.inputs.CreateUser;
+import fr.miage.blog.api.inputs.LoginCredentials;
 import fr.miage.blog.api.inputs.PublishNews;
 import fr.miage.blog.api.repositories.NewsRepository;
 import fr.miage.blog.api.repositories.UserRepository;
@@ -32,6 +33,12 @@ public class UserResource {
         User user = createUser.generate();
         user.persist();
         return Response.created(URI.create("/users/" + user.id)).build();
+    }
+
+    @POST
+    @Path("/login")
+    public Response login(@Valid LoginCredentials loginCredentials){
+        return userRepository.login(loginCredentials);
     }
 
     @DELETE
