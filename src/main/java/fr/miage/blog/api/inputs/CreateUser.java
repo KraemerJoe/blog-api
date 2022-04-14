@@ -6,6 +6,7 @@ import fr.miage.blog.api.entities.User;
 
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.util.ArrayList;
 
 public class CreateUser {
 
@@ -19,6 +20,7 @@ public class CreateUser {
         user.email = this.email;
         user.username = this.username;
         user.password = this.password;
+        user.follow = new ArrayList<>();
         return user;
     }
 

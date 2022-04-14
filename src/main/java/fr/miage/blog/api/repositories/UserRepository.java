@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,5 +41,18 @@ public class UserRepository implements PanacheMongoRepository<User> {
         }else{
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
+    }
+
+    public List<String> getFollows(String id) {
+        User user = User.findById(new ObjectId(id));
+        return user.follow;
+    }
+
+    public Response follow(String id, String userId) {
+        User user = User.findById(new ObjectId(id));
+        if(user.follow == null) user.follow = new ArrayList<>();
+        user.follow.add(userId);
+        user.update();
+        return Response.status(Response.Status.OK).build();
     }
 }

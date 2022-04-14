@@ -41,6 +41,18 @@ public class UserResource {
         return userRepository.login(loginCredentials);
     }
 
+    @GET
+    @Path("{id}/follows")
+    public List<String> getUserFollows(@PathParam("id") String id) {
+        return userRepository.getFollows(id);
+    }
+
+    @GET
+    @Path("{id}/follow/{userId}")
+    public Response followUser(@PathParam("id") String id, @PathParam("userId") String userId) {
+        return userRepository.follow(id, userId);
+    }
+
     @DELETE
     @Path("/{id}")
     public Response deleteUser(@PathParam("id") String id) {
