@@ -60,6 +60,13 @@ public class UserResource {
         return userRepository.follow(id, userId);
     }
 
+    @DELETE
+    @Path("{id}/follow/{userId}")
+    public Response unfollowUser(@PathParam("id") String id, @PathParam("userId") String userId) {
+        return userRepository.unfollow(id, userId);
+    }
+
+
     @GET
     @Path("{id}/favorites")
     public List<String> getFavoriteNews(@PathParam("id") String id) {

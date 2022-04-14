@@ -55,6 +55,15 @@ public class UserRepository implements PanacheMongoRepository<User> {
         user.update();
         return Response.status(Response.Status.OK).build();
     }
+
+    public Response unfollow(String id, String userId) {
+        User user = User.findById(new ObjectId(id));
+        if(user.follow == null) user.follow = new ArrayList<>();
+        user.follow.remove(userId);
+        user.update();
+        return Response.status(Response.Status.OK).build();
+    }
+
     public List<String> getFavoriteNews(String id) {
         User user = User.findById(new ObjectId(id));
         return user.favoriteNews;
