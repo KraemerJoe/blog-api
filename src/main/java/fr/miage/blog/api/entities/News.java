@@ -14,7 +14,7 @@ public class News extends PanacheMongoEntity  {
     public String content;
     public Instant releaseDate;
 
-    public ObjectId authorId;
-    public ObjectId subjectId;
+    public String author;
+    public String subject;
 
 }
