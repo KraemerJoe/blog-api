@@ -55,6 +55,12 @@ public class UserResource {
     }
 
     @GET
+    @Path("{id}/followers")
+    public List<String> getUserFollowers(@PathParam("id") String id) {
+        return userRepository.getFollowers(id);
+    }
+
+    @GET
     @Path("{id}/follow/{userId}")
     public Response followUser(@PathParam("id") String id, @PathParam("userId") String userId) {
         return userRepository.follow(id, userId);

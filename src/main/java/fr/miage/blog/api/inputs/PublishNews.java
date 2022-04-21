@@ -23,6 +23,7 @@ public class PublishNews {
         news.content = this.content;
         news.author = this.author;
         news.subject = this.subject;
+        news.favs = new ArrayList<>();
         news.releaseDate = Instant.now();
         return news;
     }

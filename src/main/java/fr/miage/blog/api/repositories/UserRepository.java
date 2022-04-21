@@ -1,6 +1,7 @@
 package fr.miage.blog.api.repositories;
 
 import fr.miage.blog.api.entities.News;
+import fr.miage.blog.api.entities.Subject;
 import fr.miage.blog.api.entities.User;
 import fr.miage.blog.api.inputs.LoginCredentials;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
@@ -44,8 +45,18 @@ public class UserRepository implements PanacheMongoRepository<User> {
         return user.follow;
     }
 
+    public List<String> getFollowers(String id) {
+        User user = User.findById(new ObjectId(id));
+        return user.followers;
+    }
+
     public Response follow(String id, String userId) {
         User user = User.findById(new ObjectId(id));
+
+        User userFollowed = User.findById(new ObjectId(userId));
+        userFollowed.followers.add(id);
+        userFollowed.update();
+
         if(user.follow == null) user.follow = new ArrayList<>();
         user.follow.add(userId);
         user.update();
@@ -67,6 +78,11 @@ public class UserRepository implements PanacheMongoRepository<User> {
 
     public Response favorite(String id, String newsId) {
         User user = User.findById(new ObjectId(id));
+
+        News news = News.findById(new ObjectId(newsId));
+        news.favs.add(id);
+        news.update();
+
         if(user.favoriteNews == null) user.favoriteNews = new ArrayList<>();
         user.favoriteNews.add(newsId);
         user.update();

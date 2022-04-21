@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 @NoArgsConstructor
 public class News extends PanacheMongoEntity  {
@@ -16,5 +17,10 @@ public class News extends PanacheMongoEntity  {
 
     public String author;
     public String subject;
+
+    public String authorId;
+    public String subjectId;
+
+    public ArrayList<String> favs;
 
 }
