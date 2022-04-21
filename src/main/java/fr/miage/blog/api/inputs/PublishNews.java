@@ -17,6 +17,9 @@ public class PublishNews {
     @NotNull public String author;
     @NotNull public String subject;
 
+    @NotNull public String authorId;
+    @NotNull  public String subjectId;
+
     public News generate() {
         News news = new News();
         news.title = this.title;
@@ -24,6 +27,8 @@ public class PublishNews {
         news.author = this.author;
         news.subject = this.subject;
         news.favs = new ArrayList<>();
+        news.authorId = this.authorId;
+        news.subjectId = this.subjectId;
         news.releaseDate = Instant.now();
         return news;
     }
