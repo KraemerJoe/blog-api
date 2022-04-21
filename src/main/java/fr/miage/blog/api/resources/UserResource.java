@@ -37,7 +37,7 @@ public class UserResource {
 
     @POST
     @Path("/login")
-    public Response login(@Valid LoginCredentials loginCredentials){
+    public User login(@Valid LoginCredentials loginCredentials){
         return userRepository.login(loginCredentials);
     }
 

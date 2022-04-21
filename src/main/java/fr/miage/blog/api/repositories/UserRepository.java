@@ -32,15 +32,11 @@ public class UserRepository implements PanacheMongoRepository<User> {
         }
     }
 
-    public Response login(LoginCredentials loginCredentials) {
+    public User login(LoginCredentials loginCredentials) {
         Map<String, Object> params = new HashMap<>();
         params.put("email", loginCredentials.email);
         params.put("password", loginCredentials.password);
-        if(User.find("email = :email and password = :password", params).firstResult() != null){
-            return Response.status(Response.Status.OK).build();
-        }else{
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
+        return User.find("email = :email and password = :password", params).firstResult();
     }
 
     public List<String> getFollows(String id) {
