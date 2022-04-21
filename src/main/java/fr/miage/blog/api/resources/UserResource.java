@@ -1,12 +1,10 @@
 package fr.miage.blog.api.resources;
 
-import fr.miage.blog.api.entities.News;
 import fr.miage.blog.api.entities.User;
 import fr.miage.blog.api.inputs.CreateUser;
 import fr.miage.blog.api.inputs.LoginCredentials;
-import fr.miage.blog.api.inputs.PublishNews;
-import fr.miage.blog.api.repositories.NewsRepository;
 import fr.miage.blog.api.repositories.UserRepository;
+import org.bson.types.ObjectId;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -41,6 +39,11 @@ public class UserResource {
         return userRepository.login(loginCredentials);
     }
 
+    @GET
+    @Path("/{id}")
+    public User getById(@PathParam("id") String id) {
+        return userRepository.findById(new ObjectId(id));
+    }
 
     @DELETE
     @Path("/{id}")
