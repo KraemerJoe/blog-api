@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
@@ -27,4 +28,8 @@ public class NewsRepository implements PanacheMongoRepository<News> {
         }
     }
 
+    public ArrayList<String> favs(String id) {
+        News news = News.findById(new ObjectId(id));
+        return news.favs;
+    }
 }
